@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Real_Time_Commenting.Models.BlogPost>
+
+@{ ViewBag.Title = "Blog"; }
+
+@if (!User.Identity.IsAuthenticated)
+{
+<div class="card mt-lg-2 mb-lg-5 text-center p-5" style="margin-top:5% ; ">
+    <div class="row no-gutters  text-center">
+
+        <div class="col-12">
+            <h2 class="text-center m-3"> Welcome to ParcelHub Blogs Commenting System </h2>
+            <h4 class="text-center">Please Login into the system @Html.ActionLink("here", "Login", "Account") to view the Blogs post</h4>
+        </div>
+    </div>
+    </div>
+    }
+    else
+    {
+    <h2 class="text-center">Blog Page</h2>
+
+    <h4 class="text-center">Please Enter into Exists blogs to post your comments or Create new Blog post</h4>
+
+    <div class="navbar-right btn btn-lg text-white" style="color: white;margin-bottom:2em;"> @Html.ActionLink("Create New Blog", "Create")</div>
+
+
+
+
+    <table class="table">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+<tr class="text-center">
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Body)
+    </td>
+    <td>
+
+        @Html.ActionLink("Details", "Details", new { id = item.BlogPostID }) | @Html.ActionLink("Edit Blog", "Edit", new { id = item.BlogPostID }) | @Html.ActionLink("Delete Blog", "Delete", new { id = item.BlogPostID })
+
+    </td>
+</tr>
+}
+
+    </table>
+    }
+
+
